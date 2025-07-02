@@ -1,22 +1,26 @@
-class RnaTranscription {
-    String transcribe(String dnaStrand) {
-        StringBuilder sb = new StringBuilder();
-        dnaStrand.chars()
-                .forEach(c -> sb.append(transcribe_nucleotide((char) c)));
-        return sb.toString();
+import java.util.HashMap;
+import java.util.Map;
+import static java.util.stream.Collectors.joining;
+
+public class RnaTranscription {
+    private static Map<Character, String> rnaMapping = new HashMap<Character, String>() {
+        {
+            put('G', "C");
+            put('C', "G");
+            put('T', "A");
+            put('A', "U");
+        }
+    };
+
+    public String transcribe(String dnaStrand) {
+        return dnaStrand.chars()
+                .mapToObj(i -> transcribe_nucleotide((char) i))
+                .collect(joining());
     }
 
-    char transcribe_nucleotide(char c) {
-        switch (c) {
-            case 'C':
-                return 'G';
-            case 'G':
-                return 'C';
-            case 'T':
-                return 'A';
-            case 'A':
-                return 'U';
-        }
-        throw new IllegalArgumentException("Invalid input");
+    private String transcribe_nucleotide(char i) {
+        return rnaMapping.computeIfAbsent(i, j -> {
+            throw new IllegalArgumentException("Invalid input");
+        });
     }
 }
