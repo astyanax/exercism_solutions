@@ -1,11 +1,6 @@
-{
-    str = $0
-    len = length(str)
-    reversed = ""
-
-    for (i = len; i >= 1; i--) {
-        reversed = reversed substr(str, i, 1)
-    }
-
-    print reversed
+END {
+    x=""
+    for(i=length($0) ; i!=0 ; i--)
+        x=(x substr($0,i,1))
+    print x
 }
