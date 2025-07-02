@@ -1,52 +1,38 @@
 .globl is_armstrong_number
 
 is_armstrong_number:
-    # Save return address since we'll make function calls
-    addi $sp, $sp, -4
-    sw $ra, 0($sp)
+    move  $t0, $a0
+    li    $t9, 10
+    move  $t3, $zero
+    move  $t5, $zero
+    move  $t8, $sp
 
-    # First count number of digits by repeatedly dividing by 10
-    move $t0, $a0
-    li $t1, 0
-    li $t2, 10
+count_digits:
+    addiu $t3, $t3, 1
+    div   $t0, $t9
+    mflo  $t0
+    mfhi  $t1
+    addiu $sp, $sp, -4
+    sw    $t1, ($sp)
+    bnez  $t0, count_digits
 
-digit_count:
-    beqz $t0, done_count
-    div $t0, $t2
-    mflo $t0
-    addi $t1, $t1, 1
-    j digit_count
+sum:
+    lw    $t1, ($sp)
+    addiu $sp, $sp, 4
+    li    $t2, 1
+    move  $t4, $t3
 
-done_count:
-    move $t0, $a0
-    li $t3, 0
+power:
+    andi  $t0, $t4, 1
+    beqz  $t0, square
+    mul   $t2, $t2, $t1
 
-sum_loop:
-    beqz $t0, check_result
-
-    # Get next digit
-    div $t0, $t2
-    mfhi $t4
-    mflo $t0
-
-    # Calculate digit^power
-    move $t5, $t4
-    move $t6, $t1
-    li $t7, 1
-
-power_loop:
-    beqz $t6, done_power
-    mul $t7, $t7, $t5
-    addi $t6, $t6, -1
-    j power_loop
-
-done_power:
-    add $t3, $t3, $t7
-    j sum_loop
-
-check_result:
-    seq $v0, $t3, $a0
-
-    lw $ra, 0($sp)
-    addi $sp, $sp, 4
-    jr $ra
+square:
+    mul   $t1, $t1, $t1
+    srl   $t4, $t4, 1
+    bnez  $t4, power
+    add   $t5, $t5, $t2
+    bne   $sp, $t8, sum
+    seq   $v0, $t5, $a0
+    jr    $ra
+  
