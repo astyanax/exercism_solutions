@@ -13,26 +13,24 @@ public static class PigLatin
         foreach (string w in words)
         {
             if (result.Length > 0)
-                result += " ";
+                result = $"{result} ";
 
             if (StartsWithVowelSound(w))
-                result += w + "ay";
+                result = $"{result}{w}ay";
             else
             {
                 int consonantClusterEnd = FindConsonantClusterEnd(w);
-                result += w.Substring(consonantClusterEnd) + w.Substring(0, consonantClusterEnd) + "ay";
+                result = $"{result}{w.Substring(consonantClusterEnd)}{w.Substring(0, consonantClusterEnd)}ay";
             }
         }
 
         return result;
     }
 
-    private static bool StartsWithVowelSound(string word)
-    {
-        return word.StartsWith("a") || word.StartsWith("e") || word.StartsWith("i") ||
-               word.StartsWith("o") || word.StartsWith("u") ||
-               word.StartsWith("xr") || word.StartsWith("yt");
-    }
+    private static bool StartsWithVowelSound(string word) =>
+        $"{word}".StartsWith("a") || $"{word}".StartsWith("e") || $"{word}".StartsWith("i") ||
+        $"{word}".StartsWith("o") || $"{word}".StartsWith("u") ||
+        $"{word}".StartsWith("xr") || $"{word}".StartsWith("yt");
 
     private static int FindConsonantClusterEnd(string word)
     {
