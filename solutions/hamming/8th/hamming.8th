@@ -1,0 +1,12 @@
+: letter-distance \ s1 s2 -- n
+s:= if 0 else 1 then
+;
+
+: distance \ s1 s2 -- n
+"" s:/ swap "" s:/
+a:len2 n:= if
+    ( letter-distance ) a:2map ' n:+ 0 a:reduce
+else
+    2drop null
+then
+;
