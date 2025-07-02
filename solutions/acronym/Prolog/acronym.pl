@@ -1,3 +1,4 @@
+first_letter("", "").
 first_letter(W, C) :- 
   string_chars(W, [C|_]).
 
