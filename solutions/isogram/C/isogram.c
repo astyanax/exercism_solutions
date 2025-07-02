@@ -14,7 +14,9 @@ bool is_isogram(const char phrase[]) {
         }
         char lower = tolower((unsigned char)phrase[i]);
 
-        if ((1 << (lower - 'a')) & alpha_mask) return 0;
+        if ((1 << (lower - 'a')) & alpha_mask) {
+            return false;
+        }
         alpha_mask |= (1 << (lower - 'a'));
     }
     return true;
