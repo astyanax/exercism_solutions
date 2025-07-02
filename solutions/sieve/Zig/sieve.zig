@@ -11,9 +11,9 @@ pub fn primes(buffer: []u32, limit: u32) []u32 {
     var num: u32 = 3;
     while (num <= limit) : (num += 2) {
         var is_prime = true;
-        var i: u32 = 3;
-        while (i * i <= num) : (i += 2) {
-            if (num % i == 0) {
+        var i: usize = 0;
+        while (i < count and buffer[i] * buffer[i] <= num) : (i += 1) {
+            if (num % buffer[i] == 0) {
                 is_prime = false;
                 break;
             }
