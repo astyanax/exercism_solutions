@@ -12,8 +12,10 @@ make_pig_latin() {
     [[ $? -eq 0 ]] && echo "$word""ay" && exit
     echo "${word:1:len-1}""${word:0:1}""ay"
 }
+
 result=''
 for i in $(seq $#); do
     result+=$(make_pig_latin "${!i}")' '
 done
-echo "$result" | sed 's/ $//'
+
+echo "${result% }"
