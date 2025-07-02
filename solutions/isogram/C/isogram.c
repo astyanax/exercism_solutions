@@ -9,7 +9,7 @@ bool is_isogram(const char phrase[]) {
     uint_fast32_t alpha_mask = 0;
     
     for (uint_fast64_t i = 0 ; phrase[i] != '\0' ; i++) {
-        if (!isalpha(phrase[i])) {
+        if (!isalpha((unsigned char)phrase[i])) {
              continue;
         }
         char lower = tolower((unsigned char)phrase[i]);
