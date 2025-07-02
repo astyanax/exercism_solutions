@@ -20,9 +20,8 @@ def proteins(strand):
     }
 
     proteins = []
-    while len(strand) > 0:
-        if strand[:3] in ("UAA", "UAG", "UGA"):
+    for i in range(0, len(strand), 3):
+        if strand[i:i+3] in ("UAA", "UAG", "UGA"):
             break
-        proteins.append(codons[strand[0:3]])
-        strand = strand[3:]
+        proteins.append(codons[strand[i:i+3]])
     return proteins
