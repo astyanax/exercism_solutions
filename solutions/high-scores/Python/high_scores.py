@@ -1,11 +1,12 @@
-def latest(scores):
-    return scores[-1]
+class HighScores(object):
+    def __init__(self, scores):
+        self.scores = scores
 
+    def latest(self):
+        return self.scores[-1]
 
-def personal_best(scores):
-    return max(scores)
+    def personal_best(self):
+        return max(self.scores)
 
-
-def personal_top_three(scores):
-    #top_scores = sorted(list(set(scores)), reverse=True)
-    return sorted(scores, reverse=True)[:3]
+    def personal_top_three(self):
+        return sorted(self.scores, reverse=True)[:3]
