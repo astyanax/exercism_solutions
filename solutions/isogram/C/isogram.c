@@ -1,5 +1,4 @@
 #include "isogram.h"
-#include <stdio.h>
 #include <ctype.h>
 #include <stdint.h>
 
