@@ -15,6 +15,6 @@ module ProteinTranslation
         raise ArgumentError.new "Unknown codon"
       end
     end
-    return result
+    result
   end
 end
