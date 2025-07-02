@@ -5,7 +5,7 @@
 
 def valid_triangle(f):
     def check(sides):
-        if not all(sides) or not all(side * 2 < sum(sides) for side in sides):
+        if not all(side > 0 and side * 2 < sum(sides) for side in sides):
             return False
         return f(sides)
     return check
