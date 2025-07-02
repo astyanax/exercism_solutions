@@ -1,5 +1,5 @@
-s=""
-(( "$1" % 3 == 0 )) && s+="Pling"
-(( "$1" % 5 == 0 )) && s+="Plang"
-(( "$1" % 7 == 0 )) && s+="Plong"
-echo "${s:-$1}"
+declare -A raindrop
+raindrop=( ["3"]="Pling" ["5"]="Plang" ["7"]="Plong")
+out=""
+for s in "${!raindrop[@]}"; do (( "$1" % $s == 0 )) && out=${raindrop[$s]}$out; done
+echo "${out:-$1}"
