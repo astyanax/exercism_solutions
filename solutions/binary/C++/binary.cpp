@@ -8,7 +8,7 @@ namespace binary {
             if (c != '0' && c != '1') {
                 return 0;
             }
-            decimal = (decimal << 1) + (c - '0');
+            decimal = (decimal << 1) | (c - '0');
         }
         return decimal;
     }
