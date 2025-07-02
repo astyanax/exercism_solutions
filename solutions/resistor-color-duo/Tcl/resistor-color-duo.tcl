@@ -1,7 +1,9 @@
-source resistor-color.tcl
+source ./resistor-color.tcl
 
-namespace eval ::resistorColor {
-    proc value {} {
-        throw {NOT_IMPLEMENTED} "Implement this procedure."
+proc ::resistorColor::value {args} {
+    set value 0
+    foreach color [lrange $args 0 1] {
+        set value [expr {10 * $value + [colorCode $color]}]
     }
+    return $value
 }
