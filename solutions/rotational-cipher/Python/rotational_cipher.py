@@ -1,7 +1,7 @@
 from string import ascii_lowercase, ascii_uppercase
 
-def rotate(text, rot):
-    key = str.maketrans(ascii_lowercase + ascii_uppercase,
-                        ascii_lowercase[rot:] + ascii_lowercase[:rot] +
-                        ascii_uppercase[rot:] + ascii_uppercase[:rot])
-    return str.translate(text, key)
+def rotate(text, key):
+    rotation = str.maketrans(ascii_lowercase + ascii_uppercase,
+                        ascii_lowercase[key:] + ascii_lowercase[:key] +
+                        ascii_uppercase[key:] + ascii_uppercase[:key])
+    return text.translate(rotation)
