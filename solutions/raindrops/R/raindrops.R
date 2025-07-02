@@ -1,16 +1,5 @@
 raindrops <- function(num) {
-  res <- ""
-  if (num %% 3 == 0) {
-    res <- paste(res, "Pling", sep = "")
-  }
-  if (num %% 5 == 0) {
-    res <- paste(res, "Plang", sep = "")
-  }
-  if (num %% 7 == 0) {
-    res <- paste(res, "Plong", sep = "")
-  }
-  if (nchar(res) == 0) {
-    res <- as.character(num)
-  }
-  res
+  factors <- c("Pling" = 3, "Plang" = 5, "Plong" = 7)
+  result <- factors[num %% factors == 0] |> names() |> paste(collapse = "")
+  ifelse(nchar(result) > 1, yes = result, no = as.character(num))
 }
