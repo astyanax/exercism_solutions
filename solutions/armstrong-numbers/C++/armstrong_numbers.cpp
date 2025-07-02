@@ -1,10 +1,9 @@
 #include "armstrong_numbers.h"
 
-namespace armstrong_numbers {
-    bool is_armstrong_number(unsigned int number) {
-        unsigned int order = log10(number) + 1, sum = 0;
-        for (unsigned int i = 0 ; i < order ; i++)
-            sum += pow(( (number / (unsigned int)pow(10, i)) % 10), order);
-        return sum == number;
-    }
+bool armstrong_numbers::is_armstrong_number(const int n) noexcept {
+    const int order = (n <= 0)? 0: std::log10(n) + 1;
+    int sum = 0;
+    for (int i = n; i > 0; i /= 10)
+        sum += std::pow(i % 10, order);
+    return sum == n;
 }
