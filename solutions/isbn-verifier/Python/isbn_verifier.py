@@ -5,11 +5,6 @@ def is_valid(isbn):
     if re.search(r"[\d]{9}[\dX]$", isbn) is None or len(isbn) != 10:
         return False
 
-    factor = 10
-    product = 0
-
-    for d in isbn:
-        product += factor * (10 if d == 'X' else int(d))
-        factor -= 1
+    product = sum(factor * (10 if d == 'X' else int(d)) for factor, d in zip(range(10,0,-1), isbn))
 
     return product % 11 == 0
