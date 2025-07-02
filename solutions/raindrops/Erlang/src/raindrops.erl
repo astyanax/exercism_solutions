@@ -2,18 +2,10 @@
 -export([convert/1]).
 
 convert(Number) ->
-    Factors = [{3, "Pling"}, {5, "Plang"}, {7, "Plong"}],
-    Result = lists:foldl(
-        fun({Factor, Sound}, Acc) ->
-            case Number rem Factor of
-                0 -> Acc ++ Sound;
-                _ -> Acc
-            end
-        end,
-        "",
-        Factors
-    ),
-    case Result of
-        "" -> integer_to_list(Number);
-        _ -> Result
-    end.
+Result = lists:concat([if Number rem 3 == 0 -> "Pling" ; true -> ""  end,
+                       if Number rem 5 == 0 -> "Plang" ; true -> "" end,
+                       if Number rem 7 == 0 -> "Plong" ; true -> ""  end
+                       ]),
+if Result == "" -> integer_to_list(Number);
+    true -> Result
+end.
