@@ -1,3 +1,4 @@
+"""Tisbury treasure hunt."""
 def get_coordinate(record):
     """
 
@@ -51,5 +52,4 @@ def clean_up(combined_record_group):
     :return: string of tuples separated by newlines - everything "cleaned". Excess coordinates and information removed.
     """
 
-    pass
     return "".join([f"{str(record[:1] + record[2:])}\n" for record in combined_record_group])
