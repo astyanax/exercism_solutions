@@ -1,21 +1,22 @@
 #include "isogram.h"
 #include <stdio.h>
 #include <ctype.h>
+#include <stdint.h>
 
 bool is_isogram(const char phrase[]) {
     if (!phrase)
         return false;
 
-    int map[26] = {0};
+    uint_fast32_t alpha_mask = 0;
     
-    for (int i = 0 ; phrase[i] != '\0' ; i++) {
-        if (phrase[i] == '-' || phrase[i] == ' ') {
+    for (uint_fast64_t i = 0 ; phrase[i] != '\0' ; i++) {
+        if (!isalpha(phrase[i])) {
              continue;
         }
-        char l = tolower(phrase[i]);
-        if (map[l-'a'] == 1)
-            return false;
-        map[l-'a'] = 1;
+        char lower = tolower((unsigned char)phrase[i]);
+
+        if ((1 << (lower - 'a')) & alpha_mask) return 0;
+        alpha_mask |= (1 << (lower - 'a'));
     }
     return true;
 }
