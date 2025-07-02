@@ -1,0 +1,21 @@
+: log10 \ n -- n
+  n:ln 10 n:ln n:/
+;
+
+: num-digits \ n -- n
+  log10 n:ceil n:int
+;
+
+: digit \ n1 n2 -- d1_n2
+  10 swap n:^ n:/ 10 n:mod n:int
+;
+
+: power-digit-sum \ n1 -- n1+d_i^(r_num_digits)
+  r@ I n:1- digit r@ num-digits n:^ n:+
+;
+
+: armstrong? \ n -- T
+  >r 0
+  ' power-digit-sum r@ num-digits times
+  r> n:=
+;
