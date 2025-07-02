@@ -1,0 +1,27 @@
+.text
+
+.globl is_leap_year
+
+is_leap_year:
+    addi $t0, $zero, 400
+    div $a0, $t0
+    mfhi $t0
+    beq $t0, $zero, is_leap
+    addi $t0, $zero, 100
+    div $a0, $t0
+    mfhi $t0
+    beq $t0, $zero, is_not_leap
+    addi $t0, $zero, 4        
+    div $a0, $t0
+    mfhi $t0
+    beq $t0, $zero, is_leap
+
+is_not_leap:
+    li $v0, 0
+    j end
+
+is_leap:
+    li $v0, 1
+
+end:
+    jr $ra
