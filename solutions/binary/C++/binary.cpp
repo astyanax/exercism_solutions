@@ -3,14 +3,12 @@
 namespace binary {
     int convert(std::string_view str) {
         int decimal = 0;
-        int multiplier = 1;
     
-        for (auto it = str.end() - 1; it >= str.begin(); it--) {
-            if (std::isdigit(*it) == 0) {
+        for (char c : str) {
+            if (c != '0' && c != '1') {
                 return 0;
             }
-            decimal += (*it - '0') * multiplier;
-            multiplier *= 2;
+            decimal = (decimal << 1) + (c - '0');
         }
         return decimal;
     }
