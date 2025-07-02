@@ -1,9 +1,11 @@
+"""Loops."""
+
 def round_scores(student_scores):
     """
     :param student_scores: list of student exam scores as float or int.
     :return: list of student scores *rounded* to nearest integer value.
     """
-    return map(lambda x: round(x), student_scores)
+    return [round(x) for x in student_scores]
 
 
 def count_failed_students(student_scores):
@@ -13,6 +15,7 @@ def count_failed_students(student_scores):
     """
     return len(list(filter(lambda x: x <= 40, student_scores)))
     #return sum(map(lambda n: n <= 40, student_scores))
+
 
 def above_threshold(student_scores, threshold):
     """
@@ -48,8 +51,8 @@ def student_ranking(student_scores, student_names):
      """
 
     result = []
-    for i in range(0, len(student_names)):
-        result.append(f"{i+1}. {student_names[i]}: {student_scores[i]}")
+    for i, name in enumerate(student_names):
+        result.append(f"{i+1}. {name}: {student_scores[i]}")
     return result
 
 
