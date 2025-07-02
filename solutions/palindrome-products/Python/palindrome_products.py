@@ -2,32 +2,32 @@ def is_palindrome(x):
     return str(x) == str(x)[::-1]
 
 def valid_input(f):
-    def g(min_factor,max_factor):
+    def g(max_factor, min_factor):
         if min_factor > max_factor:
             raise ValueError("min must be <= max")
-        return f(min_factor,max_factor)
+        return f(max_factor, min_factor)
     return g
 
 @valid_input
-def largest(min_factor, max_factor):
-    palindrome = None, [],
-    for i in range(max_factor, min_factor-1, -1):
-        for j in range(i, min_factor-1, -1):
-            p = i*j
-            if is_palindrome(p):
-                if not palindrome[0] or p > palindrome[0]:
-                    palindrome = p, [[i,j]]
-                elif p == palindrome[0]:
-                    palindrome[1].append([i,j])
-                break
-    return palindrome
+def smallest(max_factor, min_factor):
+    factors  = range(min_factor, max_factor + 1)
+    products = range(pow(min_factor, 2), pow(max_factor, 2)+1)
+    return palindrome_products(products, factors)
 
 @valid_input
-def smallest(min_factor, max_factor):
-    n_min = ""
-    for i in range(min_factor,max_factor+1):
-        for j in range(i, max_factor+1):
-            num = i*j
-            if is_palindrome(num) and n_min == "":
-                return num, [[i, j]]
-    return (None,[])
+def largest(max_factor, min_factor):
+    factors  = range(min_factor, max_factor + 1)
+    products = range(pow(max_factor, 2), pow(min_factor, 2)-1, -1)
+    return palindrome_products(products, factors)
+
+def palindrome_products(products, factors):
+    for product in products:
+        if is_palindrome(product):
+            pairs = []
+            for i in factors:
+                j, rem = divmod(product, i)
+                if rem == 0 and j in factors:
+                    pairs.append([i, j])
+            if len(pairs) != 0:
+                return (product, pairs)
+    return (None, [])
