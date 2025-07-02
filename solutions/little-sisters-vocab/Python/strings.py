@@ -22,8 +22,7 @@ def make_word_groups(vocab_words):
     with the prefix  and the words with prefix applied, separated
      by ' :: '.
     """
-    prefix = vocab_words[0]
-    return " :: {}".format(prefix).join(vocab_words[0:])
+    return f" :: {vocab_words[0]}".join(vocab_words)
 
 
 def remove_suffix_ness(word):
@@ -52,7 +51,7 @@ def adjective_to_verb(sentence, index):
     """
     #w = sentence.split()[index:index+1][0]
     #return f"{w}en"
-    w = sentence.split()[index]
-    if w[-1] in ['.','?','!']:
-        return w[:-1]+'en'
-    return w+'en'
+    word = sentence.split()[index]
+    if word[-1] in ['.','?','!']:
+        return word[:-1]+'en'
+    return word+'en'
