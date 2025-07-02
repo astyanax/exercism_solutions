@@ -1,14 +1,12 @@
-from string import ascii_letters, punctuation
+from string import ascii_letters, ascii_lowercase, ascii_uppercase, whitespace, punctuation
+import textwrap
 CHUNK = 5
-
-def regroup_five(string):
-    separated_string = [string[index:index+CHUNK] for index in range(0,len(string),CHUNK)]
-    return " ".join(separated_string)
+reversed_mapping = ascii_lowercase[::-1] + ascii_lowercase[::-1]
 
 def encode(plain_text):
-    atbash_cipher = plain_text.maketrans(ascii_letters, "zyxwvutsrqponmlkjihgfedcbazyxwvutsrqponmlkjihgfedcba", punctuation)
-    return regroup_five(plain_text.translate(atbash_cipher).replace(" ", ""))
+    atbash_cipher = plain_text.maketrans(ascii_letters, reversed_mapping, whitespace + punctuation)
+    return " ".join(textwrap.wrap(plain_text.translate(atbash_cipher), CHUNK))
 
 def decode(ciphered_text):
-    atbash_decipher = ciphered_text.maketrans("zyxwvutsrqponmlkjihgfedcba","abcdefghijklmnopqrstuvwxyz")
-    return ciphered_text.translate(atbash_decipher).replace(" ", "")
+    atbash_decipher = ciphered_text.maketrans(ascii_lowercase[::-1], ascii_lowercase, whitespace)
+    return ciphered_text.translate(atbash_decipher)
