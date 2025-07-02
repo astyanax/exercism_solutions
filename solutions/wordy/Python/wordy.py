@@ -1,9 +1,6 @@
-def _add(x, y): return x + y
-def _sub(x, y): return x - y
-def _mul(x, y): return x * y
-def _div(x, y): return x // y
+from operator import add, sub, floordiv, mul
 
-OPS = {'plus': _add, 'minus': _sub, 'multiplied': _mul, 'divided': _div}
+OPS = {"plus": add, "minus": sub, "divided": floordiv, "multiplied": mul}
 
 def answer(question):
     tokens = question.replace('by', '')[:-1].split()[2:]
