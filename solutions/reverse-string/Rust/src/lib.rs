@@ -1,3 +1,3 @@
 pub fn reverse(input: &str) -> String {
-    input.chars().rev().collect()
+    input.chars().fold(String::new(), |acc, c| c.to_string() + &acc)
 }
