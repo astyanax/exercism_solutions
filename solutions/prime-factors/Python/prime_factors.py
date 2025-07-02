@@ -1,4 +1,4 @@
-def factors(n):
+def factorization(n):
     factors = []
     if n < 2:
         return []
@@ -6,18 +6,19 @@ def factors(n):
     # Implement sieve logic for known primes
     for div in (2, 3, 5, 7):
         while n % div == 0:
-            factors.append(div)
+            yield div
             n /= div
 
     # Proceed with 6k+-1 possible divisors
     for k in range(12, int(n**0.5) + 1, 6):
         for div in [k-1, k+1]:
             while n % div == 0:
-                factors.append(div)
+                yield div
                 n /= div
 
     # Append potential leftover factor past the square root
     if n > 1:
-        factors.append(n)
+        yield n
 
-    return factors  
+def factors(n):
+    return [x for x in factorization(n)]
