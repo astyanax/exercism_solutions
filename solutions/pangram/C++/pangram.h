@@ -1,11 +1,14 @@
 #ifndef PANGRAM_H
 #define PANGRAM_H
 
+#include <algorithm>
+#include <bitset>
+#include <cctype>
 #include <string>
-#include <unordered_set>
+#include <string_view>
 
 namespace pangram {
-    bool is_pangram(const std::string& str);
+    bool is_pangram(std::string_view sentence);
 }
 
 #endif

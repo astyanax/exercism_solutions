@@ -1,16 +1,13 @@
 #include "pangram.h"
 
 namespace pangram {
-    bool is_pangram(const std::string& sentence) {
-        if(sentence.length() < 26)
-            return false;
+    const std::string abc = "abcdefghijklmnopqrstuvwxyz";
 
-        std::unordered_set<char> letters;
-        for(char i : sentence) {
-            char c = std::tolower(i);
-            if(std::isalpha(c))
-                letters.emplace(c);
-        }
-        return (letters.size() == 26);
+    bool is_pangram(std::string_view sentence) {
+        std::bitset<26> letters;
+        for (const auto c : sentence)
+            if (std::isalpha(c))
+                letters.set((std::tolower(c) - 'a') % 26);
+        return letters.all();
     }
 }
