@@ -14,6 +14,7 @@ proc handle_error {script} {
   } on error {err opts} {
     puts stderr "unknown error: $err"
     return -code error {*}$opts
+  } on ok {} {
+      return "success"
   }
-  return "success"
 }
