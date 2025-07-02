@@ -1,0 +1,30 @@
+: lowercase?
+a:new swap ( s:lc? 2nip over a:push drop ) s:each ' or false a:reduce
+;
+
+: uppercase?
+a:new swap ( s:uc? 2nip over a:push drop ) s:each ' or false a:reduce
+;
+
+: silence?
+dup "" s:=
+;
+
+: question?
+-1 s:@ "" swap s:+ "?" s:=
+;
+
+: shout?
+dup uppercase?
+over lowercase? not
+swap and
+;
+
+: bob \ s -- s
+s:trim
+silence? if drop "Fine. Be that way!" ;then
+shout? swap question? rot and if drop "Calm down, I know what I'm doing!" ;then
+shout? if drop "Whoa, chill out!" ;then
+question? if drop "Sure." ;then
+drop "Whatever."
+;
