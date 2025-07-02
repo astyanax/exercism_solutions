@@ -2,7 +2,7 @@ namespace eval triangle {
     proc is {type sides} {
         lassign [lsort $sides] a b c
 
-        if { !($a > 0 && $c < $a + $b) } {
+        if { $a <= 0 || $c >= $a + $b } {
             return false
         }
         set unique_sides [llength [lsort -unique $sides]]
