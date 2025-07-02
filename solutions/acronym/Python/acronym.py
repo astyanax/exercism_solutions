@@ -1,5 +1,4 @@
 import re
 
 def abbreviate(words):
-    abbr = [w[0] for w in re.split("[\s_\-]+", words)]
-    return ''.join(abbr).upper()
+    return "".join([w[0].upper() for w in re.split("[\s\-_]+", words)])
