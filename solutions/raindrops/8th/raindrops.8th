@@ -1,0 +1,7 @@
+: raindrops \ n -- s
+>r ""
+r@ 3 n:mod 0 n:= if "Pling" s:+ then
+r@ 5 n:mod 0 n:= if "Plang" s:+ then
+r@ 7 n:mod 0 n:= if "Plong" s:+ then
+dup "" s:= if drop r> >s else rdrop then
+;
