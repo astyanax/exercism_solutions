@@ -1,0 +1,38 @@
+.globl is_armstrong_number
+
+is_armstrong_number:
+    move  $t0, $a0
+    li    $t9, 10
+    move  $t3, $zero
+    move  $t5, $zero
+    move  $t8, $sp
+
+count_digits:
+    addiu $t3, $t3, 1
+    div   $t0, $t9
+    mflo  $t0
+    mfhi  $t1
+    addiu $sp, $sp, -4
+    sw    $t1, ($sp)
+    bnez  $t0, count_digits
+
+sum:
+    lw    $t1, ($sp)
+    addiu $sp, $sp, 4
+    li    $t2, 1
+    move  $t4, $t3
+
+power:
+    andi  $t0, $t4, 1
+    beqz  $t0, square
+    mul   $t2, $t2, $t1
+
+square:
+    mul   $t1, $t1, $t1
+    srl   $t4, $t4, 1
+    bnez  $t4, power
+    add   $t5, $t5, $t2
+    bne   $sp, $t8, sum
+    seq   $v0, $t5, $a0
+    jr    $ra
+  

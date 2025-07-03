@@ -1,0 +1,11 @@
+: square-of-sum \ n -- n
+dup n:1+ 2 n:^ swap 2 n:^ * 4 n:/
+;
+
+: sum-of-squares \ n -- n
+dup n:1+ over 2 * n:1+ * * 6 n:/
+;
+
+: difference-of-squares \ n -- n
+dup square-of-sum swap sum-of-squares n:-
+;
